@@ -116,13 +116,38 @@ VITE_SITE_URL=https://your-domain.example docker compose up -d --build
 - Put HTTPS in front of it. `deploy/Caddyfile.example` gives you automatic Let's Encrypt certificates with Caddy; then uncomment the HSTS header in `deploy/nginx/security-headers.conf` (or set it in Caddy as in the example).
 - To update: `git pull && docker compose up -d --build`.
 
-### GitHub Pages (free)
+### GitHub Pages (free) — the chosen host
 
-1. Push to GitHub. In the repo: **Settings → Pages → Source: GitHub Actions**.
-2. `.github/workflows/deploy-pages.yml` builds and publishes on every push to `main`.
-3. For a custom domain or a `username.github.io` repo, add a repository variable `BASE_PATH` = `/`. Add `SITE_URL` with the public URL for social previews.
+**One-time setup**
 
-GitHub Pages cannot send custom headers, so the Content-Security-Policy is not applied there. Netlify, Cloudflare Pages and the Docker image do apply it.
+1. On GitHub, create a new **public** repository (free GitHub Pages needs a public repo).
+   - Name it `<your-username>.github.io` to get the site at `https://<your-username>.github.io/`.
+   - Any other name (e.g. `MyWebsite`) gives `https://<your-username>.github.io/MyWebsite/`. The workflow sets the right base path automatically.
+   - Do not add a README or licence on GitHub: this repo already has its history.
+2. Push this folder:
+
+   ```bash
+   cd MyWebsite
+   git remote add origin https://github.com/<your-username>/<repo-name>.git
+   git push -u origin main
+   ```
+
+3. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+4. Optional, **Settings → Secrets and variables → Actions → Variables**:
+   - `SITE_URL` = the public URL (e.g. `https://<your-username>.github.io`), for LinkedIn/WhatsApp link previews.
+   - `BASE_PATH` = `/` only if you add a custom domain.
+5. Re-run the "Deploy to GitHub Pages" workflow from the **Actions** tab (the first run happens before Pages is enabled).
+
+**Every update after that:** edit the content, then
+
+```bash
+npm run check          # optional but recommended
+git add -A && git commit -m "Update experience" && git push
+```
+
+The site is rebuilt and published in about a minute. The CI workflow runs the tests and the Docker build on the same push.
+
+GitHub Pages cannot send HTTP headers, so the build also embeds the Content-Security-Policy as a `<meta>` tag (generated from `deploy/nginx/security-headers.conf`). The other headers (anti-framing, Referrer-Policy, ...) apply only on Netlify, Cloudflare Pages and the Docker image.
 
 ### Netlify or Cloudflare Pages (free)
 

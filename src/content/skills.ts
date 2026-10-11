@@ -77,14 +77,27 @@ export const hardSkills: SkillGroup[] = [
 
 export const softSkills: SoftSkill[] = [
   {
-    name: 'Leadership',
+    name: 'Leadership based on listening',
     evidence:
-      'Led the team that designed and built a GCP platform replacing SAS and Oracle ETL jobs for a telecommunications client (2024).',
+      'I lead by listening and by making every person on the team count. In 2024 I led the team that built a GCP platform replacing SAS and Oracle ETL jobs for a telecommunications client.',
   },
   {
-    name: 'Enabling others',
+    name: 'Teamwork',
     evidence:
-      'Built multi-agent workflows and MCP setups that support colleagues in data engineering and cybersecurity, and an AI Toolkit made for people with no AI experience.',
+      'I work at my best in a group, from university projects to multi-team cloud migrations, and I care about getting the most out of every contribution.',
+  },
+  {
+    name: 'Calm under pressure',
+    evidence: 'I handle high-pressure situations well and keep the work moving when the stakes are high.',
+  },
+  {
+    name: 'Handling disagreement',
+    evidence:
+      'When positions clash, I look for the approach that works best for the team and the goal, not for one side.',
+  },
+  {
+    name: 'Assertive and goal-oriented',
+    evidence: 'I say clearly what I think and I aim for the objective, reaching it in the best way possible.',
   },
   {
     name: 'Problem solving',
@@ -92,9 +105,9 @@ export const softSkills: SoftSkill[] = [
       'Found technical solutions to the constraints of moving PL/SQL logic and on-premise jobs to cloud-native services.',
   },
   {
-    name: 'Teamwork',
+    name: 'Enabling others',
     evidence:
-      'Years of close collaboration inside development teams, from university projects to multi-team migrations.',
+      'Built multi-agent workflows and MCP setups that support colleagues in data engineering and cybersecurity, and an AI Toolkit made for people with no AI experience.',
   },
   {
     name: 'Discipline & organisation',

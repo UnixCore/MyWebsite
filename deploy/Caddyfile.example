@@ -1,0 +1,14 @@
+# Example HTTPS reverse proxy for your own server, using Caddy (automatic Let's Encrypt certificates).
+# 1. Point your domain's DNS A/AAAA record to the server.
+# 2. Run the site with `docker compose up -d --build` (listens on 127.0.0.1:8080 if you set PORT=127.0.0.1:8080).
+# 3. Copy this file to /etc/caddy/Caddyfile, replace the domain, and `systemctl reload caddy`.
+
+your-domain.example {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:8080
+    header Strict-Transport-Security "max-age=31536000; includeSubDomains"
+}
+
+www.your-domain.example {
+    redir https://your-domain.example{uri} permanent
+}

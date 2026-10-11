@@ -1,0 +1,30 @@
+# Run locally or on your own server:
+#   docker compose up -d --build
+# Then open http://localhost:8080
+#
+# In production put a TLS reverse proxy in front (Caddy, Traefik, nginx-proxy, Cloudflare Tunnel).
+# See README → "Deploy on your own server".
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        VITE_SITE_URL: ${VITE_SITE_URL:-}
+    image: francesco-altomare-website:latest
+    container_name: francesco-website
+    ports:
+      - '${PORT:-8080}:8080'
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+          cpus: '0.25'

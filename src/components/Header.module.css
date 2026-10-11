@@ -1,0 +1,186 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-5);
+  min-height: var(--header-h);
+}
+
+/* Brand */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+}
+.mark {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.brandName {
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+/* DAG navigation */
+.dag {
+  justify-self: center;
+}
+.dag ol {
+  display: flex;
+  align-items: center;
+}
+.step {
+  display: flex;
+  align-items: center;
+}
+.step a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.step a:hover {
+  color: var(--ink);
+}
+
+.node {
+  position: relative;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--muted);
+  background: transparent;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+.edge {
+  display: block;
+  width: clamp(0.75rem, 2.4vw, 2.25rem);
+  height: 1.5px;
+  background: var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.edge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ok);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s ease;
+}
+
+.step[data-state='done'] .node {
+  background: var(--ok);
+  border-color: var(--ok);
+}
+.step[data-state='done'] .edge::after,
+.step[data-state='running'] .edge::after {
+  transform: scaleX(1);
+}
+
+.step[data-state='running'] a {
+  color: var(--ink);
+}
+.step[data-state='running'] .node {
+  border-color: var(--run);
+  background: var(--run);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--run) 22%, transparent);
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.iconBtn {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+}
+.iconBtn:hover {
+  border-color: var(--line);
+  background: var(--surface);
+}
+.cv {
+  min-height: 2.4rem;
+  padding-inline: var(--space-4);
+}
+
+/* Narrow screens: the DAG moves to its own row */
+@media (max-width: 52rem) {
+  .bar {
+    grid-template-columns: 1fr auto;
+    row-gap: 0;
+    padding-bottom: var(--space-2);
+  }
+  .dag {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: stretch;
+  }
+  .dag ol {
+    justify-content: space-between;
+  }
+  .step {
+    flex: 1;
+  }
+  .step:first-child {
+    flex: 0 0 auto;
+  }
+  .edge {
+    flex: 1;
+    width: auto;
+    min-width: 0.5rem;
+  }
+  .step a {
+    padding-inline: 0.3rem;
+    font-size: 0.66rem;
+  }
+}
+
+@media (max-width: 26rem) {
+  .brandName {
+    display: none;
+  }
+  .step a {
+    gap: 0.3rem;
+    font-size: 0.6rem;
+  }
+}

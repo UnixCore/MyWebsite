@@ -30,13 +30,12 @@ export const contacts: Contact[] = [
     value: '@francesco___altomare',
     url: 'https://www.instagram.com/francesco___altomare',
   },
-  // Uncomment and fill in when you want GitHub on the page:
-  // {
-  //   kind: 'github',
-  //   label: 'GitHub',
-  //   value: 'your-handle',
-  //   url: 'https://github.com/your-handle',
-  // },
+  {
+    kind: 'github',
+    label: 'GitHub',
+    value: 'UnixCore',
+    url: 'https://github.com/UnixCore/',
+  },
 ]
 
 // ─────────────────────────────────────────────────────────────

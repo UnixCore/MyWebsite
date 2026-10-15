@@ -25,3 +25,11 @@ dist-ssr
 
 # Tests
 coverage
+
+# graphify-axet
+.graphify/
+
+# Local environment files (never commit)
+.env
+.env.*
+!.env.example

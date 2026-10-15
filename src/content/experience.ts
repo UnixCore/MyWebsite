@@ -11,7 +11,7 @@ export const experience: Employer[] = [
   {
     company: 'NTT DATA Italia',
     location: 'Rende (CS), Italy',
-    // CV says "17/12/2026"; 2025-12 assumed because the previous job ends 17/12/2025.
+    // Starts 17/12/2025, right after the previous job ended (matches the CV).
     start: '2025-12',
     end: 'present',
     roles: [

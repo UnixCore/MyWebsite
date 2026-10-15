@@ -1,5 +1,5 @@
 # ── 1. Build the static site ────────────────────────────────────────
-FROM node:22-alpine AS build
+FROM node:25-alpine AS build
 WORKDIR /app
 
 # Install dependencies first so this layer is cached when only content changes.
